@@ -48,31 +48,28 @@
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Salary</th>
+                                            <th>#</th>
+                                            <th>Nama</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                        @foreach($data as $i=>$row)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>$320,800</td>
+                                            <td>{{++$i}}</td>
+                                            <td>{{$row->nama_kategori}}</td>
+                                            <td>{{$row->status_kategori}}</td>
                                         </tr>
-                                        <tr>
+
+                                        @endforeach
+                                        
+                                        <!-- <tr>
                                             <td>Garrett Winters</td>
                                             <td>Accountant</td>
                                             <td>Tokyo</td>
                                             <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>$86,000</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
