@@ -29,6 +29,7 @@ class TugasController extends Controller
     public function create()
     {
         //
+        return view('admin.tugas.create');
     }
 
     /**
