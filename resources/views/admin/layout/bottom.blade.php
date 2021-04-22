@@ -4,7 +4,7 @@
     <script src="{{asset('public/assets/js/main.js')}}"></script>
 
 
-    <script src="{{asset('publi/cvendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
+    <script src="{{asset('public/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('public/assets/js/dashboard.js')}}"></script>
     <script src="{{asset('public/assets/js/widgets.js')}}"></script>
     <script src="{{asset('public/vendors/jqvmap/dist/jquery.vmap.min.js')}}"></script>
