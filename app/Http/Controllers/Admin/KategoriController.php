@@ -17,8 +17,8 @@ class KategoriController extends Controller
     public function index()
     {
         //
-        $pagename='Data Kategori';
-        $data=kategori::all();
+        $pagename='Data Kategori'; //mengisi string pagename dengan nama Data Kategori coba mengubah nama halaman judul
+        $data=kategori::all();      //ambil semua data dari kategori  php make artisan model 
         return view('admin.kategori.index', compact('data', 'pagename'));
     }
 

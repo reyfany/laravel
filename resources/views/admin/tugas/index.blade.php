@@ -18,7 +18,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1>Beranda</h1>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Table</a></li>
-                            <li class="active">Data table</li>
+                            <li><a href="#">Beranda</a></li>
+                            <li><a href="#">Tabel</a></li>
+                            <li class="active">Data Tabel</li>
                         </ol>
                     </div>
                 </div>
@@ -41,8 +41,11 @@
 
                     <div class="col-md-12">
                         <div class="card">
+
+                        
                             <div class="card-header">
                                 <strong class="card-title">{{$pagename}}</strong>
+                           <a href="{{route('tugas.create')}}" class="btn btn-primary pull-right">Tambah </a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
