@@ -56,59 +56,35 @@
                         </div>
 
                         @endif
-                        <!-- Untuk Form menuju ke route dulu baru contller tugas store -->
-                        <form action="{{route('tugas.store')}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
+
+                        <form action="{{route('pelajar.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                           @method('PATCH')
                             @csrf
-                            <!-- Untuk Form -->
-
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_tugas" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Mahasiswa</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_mhs" value="{{$data->nama_mhs}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori Tugas</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="optionid_kategori" id="select" class="form-control">
-
-                                        @foreach($data_kategori as $kategori) 
-
-                                            <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option> 
-
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtketerangan_tugas" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label class=" form-control-label">Status Tugas</label></div>
-                                <div class="col col-md-9">
-                                    <div class="form-check-inline form-check">
-                                        <label for="inline-radio1" class="form-check-label ">
-                                            <input type="radio" id="inline-radio1" name="radiostatus_tugas" value="0" class="form-check-input">Belum
-                                        </label>
-                                        <label for="inline-radio2" class="form-check-label ">
-                                            <input type="radio" id="inline-radio2" name="radiostatus_tugas" value="1" class="form-check-input">Selesai
-                                        </label>
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">NIM Mahasiswa</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnim_mhs" value="{{$data->nim_mhs}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                                     </div>
-                                </div>
                             </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Prodi</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtprodi_mhs" value="{{$data->prodi_mhs}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                    </div>
+                                    </div>
+
 
                             
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Simpan
+                                <i class="fa fa-dot-circle-o"></i> Update
                             </button>
-
-                            <!-- Menghapus semua data dalam form -->
                             <button type="reset" class="btn btn-danger btn-sm">
                                 <i class="fa fa-ban"></i> Reset
                             </button>
-                            <!-- Lokal -->
                             
                         </form>
                     </div>                

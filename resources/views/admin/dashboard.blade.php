@@ -1,11 +1,12 @@
 @extends('admin.layout.master')
+
 @section('content')
 
 <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Beranda</h1>
+                        <h1>Dashboard</h1>
                     </div>
                 </div>
             </div>
@@ -13,7 +14,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">Beranda</li>
+                            <li class="active">Dashboard</li>
                         </ol>
                     </div>
                 </div>
@@ -311,7 +312,7 @@
 
                         <div class="media">
                             <a href="#">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{asset('public/images/admin.jng')}}">
                             </a>
                             <div class="media-body">
                                 <h2 class="text-white display-6">Jim Doe</h2>
@@ -405,7 +406,4 @@
                 <!-- /# card -->
             </div>
 
-
-        </div> <!-- .content -->
-
-    @endsection('content')
+            @endsection('content')

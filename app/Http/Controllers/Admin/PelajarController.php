@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\KategoriController;
+use App\Pelajar;
 use App\Http\Controllers\Controller;
-use App\kategori;
-use App\Task;
 use Illuminate\Http\Request;
 
-class TugasController extends Controller
+class PelajarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class TugasController extends Controller
     public function index()
     {
         //
-        $pagename='Data Tugas';
-        $data = Task::all();
-        return view('admin.tugas.index', compact('data', 'pagename'));
+        $pagename='Data Pelajar';
+        $data = Pelajar::all();
+        return view('admin.pelajar.index', compact('data', 'pagename'));
     }
 
     /**
@@ -30,9 +30,9 @@ class TugasController extends Controller
     public function create()
     {
         //
-        $data_kategori = kategori::all(); //mengimputkan semua data kategori
-        $pagename='Form Input Tugas';
-        return view('admin.tugas.create', compact('pagename', 'data_kategori')); //memberi view dari admintuags kategri.
+       
+        $pagename='Form Input Pelajar';
+        return view('admin.pelajar.create', compact('pagename')); //memberi view dari admintuags kategri.
                                           //compact adalah formulir 
     }
 
@@ -50,27 +50,26 @@ class TugasController extends Controller
 
         // rewuired haru diisi semua
         $request->validate([
-            'txtnama_tugas'=>'required',
-            'optionid_kategori'=>'required',
-            'txtketerangan_tugas'=>'required',
-            'radiostatus_tugas'=>'required',
+            'txtnama_mhs'=>'required',
+            'txtnim_mhs'=>'required',
+            'txtprodi_mhs'=>'required',
+
         ]);
 
         //membuat objek dari sebuah class yang bernama Task
-        $data_tugas = new Task([
+        $pelajar = new Pelajar([
             
             //data seblum dikirim harus di packing kedalam satu clas, agar pengiriman 
-            'nama_tugas'=> $request ->get('txtnama_tugas'),
-            'id_kategori'=> $request ->get('optionid_kategori'), 
-            'ket_tugas'=> $request ->get('txtketerangan_tugas'),
-            'status_tugas'=> $request ->get('radiostatus_tugas'),
+            'nama_mhs'=> $request ->get('txtnama_mhs'),
+            'nim_mhs'=> $request ->get('txtnim_mhs'), 
+            'prodi_mhs'=> $request ->get('txtprodi_mhs'),
         ]);
 
         //data yang di form sudah masuk kedalam phpmyadmin dan belum bisa menampilkan datanya
-        $data_tugas->save();
+        $pelajar->save();
 
         // mengarahkan ke admin tugas otomatis mencari index
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil disimpan');
+        return redirect('admin/pelajar')->with('sukses', 'tugas berhasil disimpan');
     }
 
     /**
@@ -93,10 +92,9 @@ class TugasController extends Controller
     public function edit($id)
     {
         //
-        $data_kategori=kategori::all();
-        $pagename='Update Tugas';
-        $data=Task::Find($id);
-        return view('admin.tugas.edit', compact('data', 'pagename', 'data_kategori'));
+        $pagename='Update Pelajar';
+        $data= Pelajar::Find($id);
+        return view('admin.pelajar.edit', compact('data', 'pagename'));
     }
 
     /**
@@ -110,22 +108,19 @@ class TugasController extends Controller
     {
         //
         $request->validate([
-            'txtnama_tugas'=>'required',
-            'optionid_kategori'=>'required',
-            'txtketerangan_tugas'=>'required',
-            'radiostatus_tugas'=>'required',
+            'txtnama_mhs'=>'required',
+            'txtnim_mhs'=>'required',
+            'txtprodi_mhs'=>'required'
         ]);
 
-            $tugas=Task::find($id);
-
-            $tugas->nama_tugas = $request ->get('txtnama_tugas');
-            $tugas->id_kategori = $request ->get('optionid_kategori'); 
-            $tugas->ket_tugas = $request ->get('txtketerangan_tugas');
-            $tugas->status_tugas = $request ->get('radiostatus_tugas');
+            $pelajar=Pelajar::find($id);
+            $pelajar->nama_mhs = $request ->get('txtnama_mhs');
+            $pelajar->nim_mhs = $request ->get('txtnim_mhs'); 
+            $pelajar->prodi_mhs = $request ->get('txtprodi_mhs');
        
 
-        $tugas->save();
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil diupdate');
+        $pelajar->save();
+        return redirect('admin/pelajar')->with('sukses', 'mahasiswa berhasil diupdate');
     }
 
     /**
@@ -137,8 +132,8 @@ class TugasController extends Controller
     public function destroy($id)
     {
         //
-        $tugas = Task::find($id);
-        $tugas->delete();
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil dihapus');
+        $pelajar = Pelajar::find($id);
+        $pelajar->delete();
+        return redirect('admin/pelajar')->with('sukses', 'tugas berhasil dihapus');
     }
 }

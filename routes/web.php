@@ -29,5 +29,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin','middleware'=>'auth'], function(){
     Route::get('/', 'Admin\DashboardController@index');
     Route::resource('/kategori', 'Admin\KategoriController');
-    Route::resource('/tugas', 'Admin\TugasController');
+    Route::resource('/tugas', 'Admin\TugasController'); //menampilkan Tugas
+    Route::resource('/pelajar', 'Admin\PelajarController'); 
+    Route::resource('/sekolah', 'Admin\SekolahController'); 
 });
+Auth::routes();

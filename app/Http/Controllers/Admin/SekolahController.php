@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\kategori;
 use App\Task;
+use App\Sekolah;
 use Illuminate\Http\Request;
 
-class TugasController extends Controller
+class SekolahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class TugasController extends Controller
     public function index()
     {
         //
-        $pagename='Data Tugas';
-        $data = Task::all();
-        return view('admin.tugas.index', compact('data', 'pagename'));
+        $pagename='Data Sekolah';
+        $data = Sekolah::all();
+        return view('admin.sekolah.index', compact('data', 'pagename'));
     }
 
     /**
@@ -30,9 +30,8 @@ class TugasController extends Controller
     public function create()
     {
         //
-        $data_kategori = kategori::all(); //mengimputkan semua data kategori
-        $pagename='Form Input Tugas';
-        return view('admin.tugas.create', compact('pagename', 'data_kategori')); //memberi view dari admintuags kategri.
+        $pagename='Form Input Sekolah';
+        return view('admin.sekolah.create', compact('pagename')); //memberi view dari admintuags kategri.
                                           //compact adalah formulir 
     }
 
@@ -50,27 +49,25 @@ class TugasController extends Controller
 
         // rewuired haru diisi semua
         $request->validate([
-            'txtnama_tugas'=>'required',
-            'optionid_kategori'=>'required',
-            'txtketerangan_tugas'=>'required',
-            'radiostatus_tugas'=>'required',
+            'txtnama_sekolah'=>'required',
+            'txtkode_sekolah'=>'required',
+            'txtnama_kepala'=>'required',
         ]);
 
         //membuat objek dari sebuah class yang bernama Task
-        $data_tugas = new Task([
+        $sekolah = new Sekolah([
             
             //data seblum dikirim harus di packing kedalam satu clas, agar pengiriman 
-            'nama_tugas'=> $request ->get('txtnama_tugas'),
-            'id_kategori'=> $request ->get('optionid_kategori'), 
-            'ket_tugas'=> $request ->get('txtketerangan_tugas'),
-            'status_tugas'=> $request ->get('radiostatus_tugas'),
+            'nama_sekolah'=> $request ->get('txtnama_sekolah'),
+            'kode_sekolah'=> $request ->get('txtkode_sekolah'), 
+            'nama_kepala'=> $request ->get('txtnama_kepala'),
         ]);
 
         //data yang di form sudah masuk kedalam phpmyadmin dan belum bisa menampilkan datanya
-        $data_tugas->save();
+        $sekolah->save();
 
         // mengarahkan ke admin tugas otomatis mencari index
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil disimpan');
+        return redirect('admin/sekolah')->with('sukses', 'sekolah berhasil disimpan');
     }
 
     /**
@@ -93,10 +90,9 @@ class TugasController extends Controller
     public function edit($id)
     {
         //
-        $data_kategori=kategori::all();
-        $pagename='Update Tugas';
-        $data=Task::Find($id);
-        return view('admin.tugas.edit', compact('data', 'pagename', 'data_kategori'));
+        $pagename='Update Sekolah';
+        $data= Sekolah::Find($id);
+        return view('admin.sekolah.edit', compact('data', 'pagename'));
     }
 
     /**
@@ -110,22 +106,20 @@ class TugasController extends Controller
     {
         //
         $request->validate([
-            'txtnama_tugas'=>'required',
-            'optionid_kategori'=>'required',
-            'txtketerangan_tugas'=>'required',
-            'radiostatus_tugas'=>'required',
+            'txtnama_sekolah'=>'required',
+            'txtkode_sekolah'=>'required',
+            'txtnama_kepala'=>'required',
         ]);
 
-            $tugas=Task::find($id);
+            $sekolah= Sekolah::find($id);
 
-            $tugas->nama_tugas = $request ->get('txtnama_tugas');
-            $tugas->id_kategori = $request ->get('optionid_kategori'); 
-            $tugas->ket_tugas = $request ->get('txtketerangan_tugas');
-            $tugas->status_tugas = $request ->get('radiostatus_tugas');
+            $sekolah->nama_sekolah = $request ->get('txtnama_sekolah');
+            $sekolah->kode_sekolah = $request ->get('txtkode_sekolah'); 
+            $sekolah->nama_kepala = $request ->get('txtnama_kepala');
        
 
-        $tugas->save();
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil diupdate');
+        $sekolah->save();
+        return redirect('admin/sekolah')->with('sukses', 'sekolah berhasil diupdate');
     }
 
     /**
@@ -137,8 +131,8 @@ class TugasController extends Controller
     public function destroy($id)
     {
         //
-        $tugas = Task::find($id);
-        $tugas->delete();
-        return redirect('admin/tugas')->with('sukses', 'tugas berhasil dihapus');
+        $sekolah = Sekolah::find($id);
+        $sekolah->delete();
+        return redirect('admin/sekolah')->with('sukses', 'sekolahberhasil dihapus');
     }
 }
