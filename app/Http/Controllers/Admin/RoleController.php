@@ -28,7 +28,12 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $pagename='Tambah Role'; 
+        //siapkan pagename tambah role
+        $allPermission=Permission::all();
+        //data semua role dikirim dari kontroller all permision diterima ke create.blade.php
+        return view('admin.role.create', compact('pagename', 'allPermission')); 
+        //mengembalikan view pada bagian admin.role.create sertakan data pagename dan allPermission
     }
 
     /**

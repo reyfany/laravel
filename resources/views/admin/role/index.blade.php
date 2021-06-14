@@ -45,7 +45,7 @@
                         
                             <div class="card-header">
                                 <strong class="card-title">{{$pagename}}</strong>
-                           <a href="{{route('tugas.create')}}" class="btn btn-primary pull-right">Tambah </a>
+                           <a href="{{route('roles.create')}}" class="btn btn-primary pull-right">Tambah Role</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -74,8 +74,8 @@
                                                     </ul>
                                                 @endif
 
-                                            <td><a href="{{route('tugas.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
-                                            <td> <form action="{{route('tugas.destroy', $row->id)}}" method="post">
+                                            <td><a href="{{route('roles.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
+                                            <td> <form action="{{route('roles.destroy', $row->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Hapus</button>
@@ -96,10 +96,10 @@
             </div><!-- .animated -->
         </div><!-- .content -->
 
-    <script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <!-- <script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('public/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('public/assets/js/main.js')}}"></script>
+    <script src="{{asset('public/assets/js/main.js')}}"></script> -->
 
 
     <script src="{{asset('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
