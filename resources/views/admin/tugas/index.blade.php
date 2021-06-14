@@ -62,8 +62,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        @foreach($data as $i=>$row)
+                                    @foreach($data as $i=>$row)
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td>{{$row->nama_tugas}}</td>
@@ -81,13 +80,6 @@
                                         </tr>
 
                                         @endforeach
-                                        
-                                        <!-- <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>$170,750</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>

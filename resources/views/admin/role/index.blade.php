@@ -61,21 +61,21 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach($role_permission as $i=>$row)
+                                    @foreach($role_permission as $i=>$row)
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td>{{$row->name}}</td>
                                             <td>
-                                                    @if($row->permissions())
-                                                        <ul style="margin-left: 240px">
-                                                            @foreach ($row->permissions()->get() as $permission )
-                                                            <li>{{$permission->name}}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                            </td>
-                                            <td><a href="{{route('roles.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
-                                            <td> <form action="{{route('roles.destroy', $row->id)}}" method="post">
+                                                @if($row->permissions())
+                                                    <ul style="margin-left: 20px">
+                                                        @foreach ($row->permissions()->get() as $permission)
+                                                          <li> {{$permission->name}} </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+
+                                            <td><a href="{{route('tugas.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
+                                            <td> <form action="{{route('tugas.destroy', $row->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Hapus</button>
@@ -85,13 +85,6 @@
                                         </tr>
 
                                         @endforeach
-                                        
-                                        <!-- <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>$170,750</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
