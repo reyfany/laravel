@@ -312,7 +312,7 @@
 
                         <div class="media">
                             <a href="#">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{asset('public/images/admin.jng')}}">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{asset('public/images/1.jpg')}}">
                             </a>
                             <div class="media-body">
                                 <h2 class="text-white display-6">Jim Doe</h2>

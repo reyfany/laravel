@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome'); //memanggil front index
+    return view('front.index'); //memanggil front index
 });
 
 Auth::routes();
@@ -32,5 +32,6 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function(){
     Route::resource('/tugas', 'Admin\TugasController'); //menampilkan tabel Tugas
     Route::resource('/pelajar', 'Admin\PelajarController'); 
     Route::resource('/sekolah', 'Admin\SekolahController'); 
+    Route::resource('/roles', 'Admin\RoleController'); 
 });
 Auth::routes();
