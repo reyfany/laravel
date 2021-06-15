@@ -44,7 +44,24 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'txtnama_role'=>'required',
+            'optionid_permission'=>'required|array',
+            'permission.*'=>'required|string',
+        ],[
+            'textname_role.required' => "nama role harus diisi",
+            //pesan eror pada role
+            'permission.required' => "anda harus memilih permission",
+            'permission.*.required' => "anda harus memilih permission"
+            //pesan eror pada permission
+        ]);
+
+        $role=Role::create(['name'=>$request->input('txtnama_role')]);
+        // name ambil dari request //akan tambah ke tabel
+        $role->syncPermissions($request->input('optionid_permission'));
+        // hasil input pada permission
+        
+        return redirect()->action('Admin\RoleController@index')->with('sukses','Role berhasil dibuat');
     }
 
     /**
