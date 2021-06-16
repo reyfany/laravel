@@ -15,7 +15,7 @@
 <script>
     $(document).ready(function(){
         $(".mul-select").select2({
-            placeholder: "Pilih permission .....",
+            placeholder: "Pilih Permission .....",
             tags: true,
             tokenSeparators: ['/',',',';',' '],
             width: "100%"

@@ -7,8 +7,21 @@
 <link rel="stylesheet" href="{{asset('public/vendors/themify-icons/css/themify-icons.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/selectFX/css/cs-skin-elastic.css')}}">
-
 <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
+
+<script>
+    $(document).ready(function(){
+        $(".mul-select").select2({
+            placeholder: "Pilih Permission .....",
+            tags: true,
+            tokenSeparators: ['/',',',';',' '],
+            width: "100%"
+        });
+      });
+</script>
 
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -56,63 +69,46 @@
                         </div>
 
                         @endif
-
-                        <form action="{{route('tugas.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                           @method('PATCH')
-                            @csrf
+                        <form action="{{route('roles.update',$role->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
+                            @method('PATCH')
+                            @csrf                          
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_tugas" value="{{$data->nama_tugas}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
+                                <div class="col-12 col-md-9"><input type="text" value="{{$role->name}}" id="text-input" name="txtnama_role" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori Tugas</label></div>
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="optionid_kategori" id="select" class="form-control">
+                                    <select name="optionid_permission[]" id="select" class="mul-select" multiple="true">
+                                    @foreach($allPermission as $permission)
 
-                                     @foreach($data_kategori as $kategori)
-                                        <option value="{{$kategori->id}}">
-                                            @if($kategori->id==$data->id_kategor)
-                                            selected
+                                        <option value= {{$permission->id}}
+                                            @if(in_array($permission->id,$rolePermission))
+                                                selected
                                             @endif
-                                        {{$kategori->nama_kategori}}</option>
+                                        >
+                                            {{$permission->name}}</option>
 
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtketerangan_tugas" value="{{$data->ket_tugas}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label class=" form-control-label">Status Tugas</label></div>
-                                <div class="col col-md-9">
-                                    <div class="form-check-inline form-check">
-                                        <label for="inline-radio1" class="form-check-label ">
-                                            <input type="radio" id="inline-radio1" name="radiostatus_tugas" value="0" {{$data->status_tugas==0?'checked':''}}class="form-check-input">Belum
-                                        </label>
-                                        <label for="inline-radio2" class="form-check-label ">
-                                            <input type="radio" id="inline-radio2" name="radiostatus_tugas" value="1" {{$data->status_tugas==1?'checked':''}} class="form-check-input">Selesai
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                             
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Update
+                                <i class="fa fa-dot-circle-o"></i> Simpan
                             </button>
+
+                            <!-- Menghapus semua data dalam form -->
                             <button type="reset" class="btn btn-danger btn-sm">
                                 <i class="fa fa-ban"></i> Reset
                             </button>
+                            <!-- Lokal -->
                             
                         </form>
                     </div>                
                 </div>
-            </div>
+             </div>
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use DB;
 
 class RoleController extends Controller
 {
@@ -16,9 +17,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        //
         $pagename='Role';
-        $role_permission=Role::with('permissions')->get();
-        return view('admin.role.index', compact('pagename', 'role_permission'));
+        $role_permission = Role::with('permissions')->get();
+        return view('admin.role.index', compact('pagename','role_permission'));
     }
 
     /**
@@ -28,12 +30,13 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $pagename='Tambah Role'; 
+        $pagename='Tambah Role';
         //siapkan pagename tambah role
         $allPermission=Permission::all();
-        //data semua role dikirim dari kontroller all permision diterima ke create.blade.php
-        return view('admin.role.create', compact('pagename', 'allPermission')); 
+         //data semua role dikirim dari kontroller all permision diterima ke create.blade.php
+        return view('admin.role.create',compact('pagename','allPermission'));
         //mengembalikan view pada bagian admin.role.create sertakan data pagename dan allPermission
+        
     }
 
     /**
@@ -47,21 +50,20 @@ class RoleController extends Controller
         $this->validate($request,[
             'txtnama_role'=>'required',
             'optionid_permission'=>'required|array',
-            'permission.*'=>'required|string',
+            'permission.*'=>'required|string'
         ],[
-            'textname_role.required' => "nama role harus diisi",
-            //pesan eror pada role
-            'permission.required' => "anda harus memilih permission",
-            'permission.*.required' => "anda harus memilih permission"
+            'txtnama_role.required'=>"nama role harus diisi",
+           //pesan eror pada role
+            'permission.required'=>"anda harus memilih permission",
             //pesan eror pada permission
+            'permission.*.required'=>"anda harus memilih permission"
         ]);
-
         $role=Role::create(['name'=>$request->input('txtnama_role')]);
         // name ambil dari request //akan tambah ke tabel
         $role->syncPermissions($request->input('optionid_permission'));
         // hasil input pada permission
         
-        return redirect()->action('Admin\RoleController@index')->with('sukses','Role berhasil dibuat');
+        return redirect()->action('Admin\RoleController@index')->with('sukses','role berhasil dibuat');
     }
 
     /**
@@ -83,7 +85,20 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pagename='Edit Role';
+        // judul web
+        $role=Role::find($id);
+        //mencari role berdasarkan id
+        $allPermission=Permission::all();
+        //data semua role dikirim dari kontroller all permision diterima ke create.blade.php
+        $rolePermission=DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
+        // kirim permission //use DB table // ambil di role permission cari where role has permission = $id
+        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+            // ambil permission id dan role has permission
+        
+        ->all();
+        return view('admin.role.edit',compact('pagename','allPermission','role','rolePermission'));
+        //mengembalikan view pada bagian admin.role.create sertakan data pagename dan allPermission
     }
 
     /**
@@ -95,7 +110,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'txtnama_role'=>'required',
+            'optionid_permission'=>'required|array',
+            'permission.*'=>'required|string'
+        ],[
+            'txtnama_role.required'=>"nama role harus diisi",
+            'permission.required'=>"anda harus memilih permission",
+            'permission.*.required'=>"anda harus memilih permission"
+        ]);
+        $role=Role::find($id);
+        $role->name=$request->input('txtnama_role');
+        $role->update();
+        $role->syncPermissions($request->input('optionid_permission'));
+        return redirect()->action('Admin\RoleController@index')->with('sukses','role berhasil diupdate');
     }
 
     /**
@@ -106,6 +134,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role=Role::find($id);
+        $role->delete();
+
+        return redirect()->action('Admin\RoleController@index')->with('sukses','role berhasil dihapus');
     }
 }
