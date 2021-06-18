@@ -93,10 +93,9 @@ class RoleController extends Controller
         //data semua role dikirim dari kontroller all permision diterima ke create.blade.php
         $rolePermission=DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
         // kirim permission //use DB table // ambil di role permission cari where role has permission = $id
-        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             // ambil permission id dan role has permission
-        
-        ->all();
+            ->all();
         return view('admin.role.edit',compact('pagename','allPermission','role','rolePermission'));
         //mengembalikan view pada bagian admin.role.create sertakan data pagename dan allPermission
     }
@@ -120,8 +119,10 @@ class RoleController extends Controller
             'permission.*.required'=>"anda harus memilih permission"
         ]);
         $role=Role::find($id);
+        // Mencari dulu role id 
         $role->name=$request->input('txtnama_role');
         $role->update();
+        // role update
         $role->syncPermissions($request->input('optionid_permission'));
         return redirect()->action('Admin\RoleController@index')->with('sukses','role berhasil diupdate');
     }
@@ -135,8 +136,11 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role=Role::find($id);
+        // pola yang sama
         $role->delete();
+        //kemudan hapus
 
         return redirect()->action('Admin\RoleController@index')->with('sukses','role berhasil dihapus');
+        //redirect sama seperti diatas
     }
 }
