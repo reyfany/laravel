@@ -66,7 +66,14 @@
                                             <td>{{++$i}}</td>
                                             <td>{{$row->name}}</td>
                                             <td>{{$row->email}}</td>
-                                            <td>{{$row->role}}</td>
+                                           <td>
+                                                @if(!empty($row->getRoleNames()))
+                                                    @foreach ($row->getRoleNames() as $role)
+                                                        <label class="badge badge-success">{{ $role }}</label>                                                
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                            
                                             <td><a href="{{route('users.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
                                             <td> <form action="{{route('users.destroy', $row->id)}}" method="post">
                                                 @csrf
