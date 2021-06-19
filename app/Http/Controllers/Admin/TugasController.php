@@ -14,6 +14,17 @@ class TugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  function __construct(){
+        // $this -> middleware('role:admin|manajemen');
+        // $this -> middleware(['role:karyawan',['only'=>'index']]);
+
+        $this->middleware('permission:tugas-list',['only'=>['index']]);
+        $this->middleware('permission:tugas-create',['only'=>['create','store']]);
+        $this->middleware('permission:tugas-edit',['only'=>['edit','update']]);
+        $this->middleware('permission:tugas-delete',['only'=>['destroy']]);
+    }
+
     public function index()
     {
         //
