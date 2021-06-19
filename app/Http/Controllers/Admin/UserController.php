@@ -17,6 +17,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    function __construct(){
+        $this -> middleware(['role:admin']);
+    }
+
+    // public function __construct()
+    // {
+    //     $this->middleware(['role:super-admin','permission:publish articles|edit articles']);
+    // }
+
     public function index()
     {
         //
