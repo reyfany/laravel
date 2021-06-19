@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Hash;
+use DB;
 // use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
@@ -87,6 +88,12 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $pagename='Edit User';
+        $user=User::find($id);
+        $allRoles=Role::all();
+        $userRole=$user->roles->pluck('id')->all();
+
+        return view('admin.user.edit', compact('pagename', 'user', 'allRoles','userRole'));
     }
 
     /**
@@ -99,6 +106,25 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'txtnama_user'=>'required',
+            'txtemail_user'=>'required|email',
+            // 'txtpassword_user'=>'required|same:txtkonfirmasipassword_user',
+            'role_user'=>'required'
+        ]);
+
+        $user=User::find($id);
+        $user->name=$request->txtnama_user;
+        $user->email=$request->txtemail_user;
+        if($request->txtpassword_user !=null){
+            $user->password=Hash::make($request->txtpassword_user);
+        }
+        $user->update();
+
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->role_user);
+        return redirect()->route('users.index')->with('sukses','User berhasil diupdate');
     }
 
     /**
@@ -109,6 +135,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=user::find($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('sukses','User berhasil dihapus');
     }
 }

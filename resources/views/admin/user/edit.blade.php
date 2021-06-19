@@ -7,8 +7,10 @@
 <link rel="stylesheet" href="{{asset('public/vendors/themify-icons/css/themify-icons.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/selectFX/css/cs-skin-elastic.css')}}">
-
 <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
 
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -56,68 +58,66 @@
                         </div>
 
                         @endif
-
-                        <form action="{{route('tugas.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="{{route('users.update', $user->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
                            @method('PATCH')
-                            @csrf
+                            @csrf                          
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_tugas" value="{{$data->nama_tugas}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama User</label></div>
+                                <div class="col-12 col-md-9"><input type="text" value="{{ $user->name }}" id="text-input" name="txtnama_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori Tugas</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email User</label></div>
+                                <div class="col-12 col-md-9"><input type="text" value="{{ $user->email }}" id="text-input" name="txtemail_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Password</label></div>
+                                <div class="col-12 col-md-9"><input type="password" value="" id="text-input" name="txtpassword_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Konfirmasi Password</label></div>
+                                <div class="col-12 col-md-9"><input type="password" id="text-input" name="txtkonfirmasipassword_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+                            
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Role</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="optionid_kategori" id="select" class="form-control">
-
-                                     @foreach($data_kategori as $kategori)
-                                        <option value="{{$kategori->id}}">
-                                            @if($kategori->id==$data->id_kategor)
-                                            selected
-                                            @endif
-                                        {{$kategori->nama_kategori}}</option>
-
-                                        @endforeach
+                                    <select name="role_user" id="select" class="form-control">
+                                      
+                                        @foreach($allRoles as $role) 
+                                        <option value={{$role->id}}
+                                            @if (in_array($role->id, $userRole))
+                                                selected
+                                            @endif    
+                                            >
+                                            {{$role->name}}</option> 
+                                        @endforeach  
+                                    
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtketerangan_tugas" value="{{$data->ket_tugas}}" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label class=" form-control-label">Status Tugas</label></div>
-                                <div class="col col-md-9">
-                                    <div class="form-check-inline form-check">
-                                        <label for="inline-radio1" class="form-check-label ">
-                                            <input type="radio" id="inline-radio1" name="radiostatus_tugas" value="0" {{$data->status_tugas==0?'checked':''}}class="form-check-input">Belum
-                                        </label>
-                                        <label for="inline-radio2" class="form-check-label ">
-                                            <input type="radio" id="inline-radio2" name="radiostatus_tugas" value="1" {{$data->status_tugas==1?'checked':''}} class="form-check-input">Selesai
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                             
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Update
+                                <i class="fa fa-dot-circle-o"></i> Simpan
                             </button>
+
+                            <!-- Menghapus semua data dalam form -->
                             <button type="reset" class="btn btn-danger btn-sm">
                                 <i class="fa fa-ban"></i> Reset
                             </button>
+                            <!-- Lokal -->
                             
                         </form>
                     </div>                
                 </div>
-            </div>
+             </div>
         </div>
     </div>
 </div>
 
-<script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></>
 <script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
 
 <script src="{{asset('public/vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
