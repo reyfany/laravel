@@ -73,6 +73,20 @@
                             </div>
 
                             <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Kepala Sekolah</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_kepala" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Simpan
+                            </button>
+
+                            <!-- Menghapus semua data dalam form -->
+                            <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Reset
+                            </button>
+
+                            <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Prodi</label></div>
                                 <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtprodi_mhs" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
@@ -95,8 +109,8 @@
     </div>
 </div>
 
-<script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
+{{-- <script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script> --}}
 
 <script src="{{asset('public/vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
 <script src="{{asset('public/vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js')}}"></script>

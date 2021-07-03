@@ -58,8 +58,8 @@
                                             <th>Kategori</th>
                                             <th>Keterangan</th>
                                             <th>Status</th>
-                                            {{-- <th>Edit</th>
-                                            <th>Hapus</th> --}}
+                                            <th>Edit</th>
+                                            <th>Hapus</th>
 
                                         </tr>
                                     </thead>
@@ -71,12 +71,12 @@
                                             <td>{{$row->id_kategori}}</td>
                                             <td>{{$row->ket_tugas}}</td>
                                             <td>{{$row->status_tugas}}</td>
-                                            {{-- <td> --}}
+                                            <td>
                                                 @can('tugas-edit')
                                                 <a href="{{route('tugas.edit', $row->id)}}" class='btn btn-primary'>Edit </a>
                                                 @endcan
-                                            {{-- </td>
-                                            <td>  --}}
+                                            </td>
+                                            <td> 
                                                 @can('tugas-edit')
                                                 <form action="{{route('tugas.destroy', $row->id)}}" method="post">
                                                 @csrf
@@ -84,7 +84,7 @@
                                                 <button class="btn btn-danger" type="submit">Hapus</button>
                                                 @endcan
                                                 </form>
-                                            {{-- </td> --}}
+                                            </td>
                                             
                                         </tr>
 

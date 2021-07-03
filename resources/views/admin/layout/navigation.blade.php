@@ -15,7 +15,7 @@
                         <a href="{{url('/admin')}}"> <i class="menu-icon fa fa-dashboard"></i>Beranda</a>
                         <a href="{{url('/admin/kategori')}}"> <i class="menu-icon fa fa-dashboard"></i>Kategori</a>
                         <a href="{{url('/admin/tugas')}}"> <i class="menu-icon fa fa-dashboard"></i>Tugas</a>
-                        <a href="{{url('/admin/pelajar')}}"> <i class="menu-icon fa fa-dashboard"></i>Mahasiswa</a>
+                        {{-- <a href="{{url('/admin/pelajar')}}"> <i class="menu-icon fa fa-dashboard"></i>Mahasiswa</a> --}}
                         <a href="{{url('/admin/sekolah')}}"> <i class="menu-icon fa fa-dashboard"></i>Sekolah</a>
                         @role('admin')
                         {{-- hanya kelihatan tugas,mahasiswa,sekolah --}}
