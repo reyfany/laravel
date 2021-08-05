@@ -45,7 +45,9 @@
                         
                             <div class="card-header">
                                 <strong class="card-title">{{$pagename}}</strong>
-                           <a href="{{route('tugas.create')}}" class="btn btn-primary pull-right">Tambah </a>
+                                @can('tugas-create')
+                                <a href="{{route('tugas.create')}}" class="btn btn-primary pull-right">Tambah </a>
+                                @endcan
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -62,32 +64,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        @foreach($data as $i=>$row)
+                                    @foreach($data as $i=>$row)
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td>{{$row->nama_tugas}}</td>
                                             <td>{{$row->id_kategori}}</td>
                                             <td>{{$row->ket_tugas}}</td>
                                             <td>{{$row->status_tugas}}</td>
-                                            <td><a href="{{route('tugas.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
-                                            <td> <form action="{{route('tugas.destroy', $row->id)}}" method="post">
+                                            <td>
+                                                @can('tugas-edit')
+                                                <a href="{{route('tugas.edit', $row->id)}}" class='btn btn-primary'>Edit </a>
+                                                @endcan
+                                            </td>
+                                            <td> 
+                                                @can('tugas-edit')
+                                                <form action="{{route('tugas.destroy', $row->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Hapus</button>
-                                            </form>
+                                                @endcan
+                                                </form>
                                             </td>
                                             
                                         </tr>
 
                                         @endforeach
-                                        
-                                        <!-- <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>$170,750</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -99,10 +100,10 @@
             </div><!-- .animated -->
         </div><!-- .content -->
 
-    <script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <!-- <script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('public/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('public/assets/js/main.js')}}"></script>
+    <script src="{{asset('public/assets/js/main.js')}}"></script> -->
 
 
     <script src="{{asset('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>

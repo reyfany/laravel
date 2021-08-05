@@ -33,5 +33,6 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function(){
     Route::resource('/pelajar', 'Admin\PelajarController'); 
     Route::resource('/sekolah', 'Admin\SekolahController'); 
     Route::resource('/roles', 'Admin\RoleController'); 
+    Route::resource('/users', 'Admin\UserController'); 
 });
 Auth::routes();

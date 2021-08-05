@@ -45,31 +45,37 @@
                         
                             <div class="card-header">
                                 <strong class="card-title">{{$pagename}}</strong>
-                           <a href="{{route('pelajar.create')}}" class="btn btn-primary pull-right">Tambah </a>
+                           <a href="{{route('users.create')}}" class="btn btn-primary pull-right">Tambah User</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama mahasiswa</th>
-                                            <th>NIM Mahasiswa</th>
-                                            <th>Prodi</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
                                             <th>Edit</th>
                                             <th>Hapus</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        @foreach($data as $i=>$row)
+                                    @foreach($allUser as $i=>$row)
                                         <tr>
                                             <td>{{++$i}}</td>
-                                            <td>{{$row->nama_mhs}}</td>
-                                            <td>{{$row->nim_mhs}}</td>
-                                            <td>{{$row->prodi_mhs}}</td>
-                                            <td><a href="{{route('pelajar.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
-                                            <td> <form action="{{route('pelajar.destroy', $row->id)}}" method="post">
+                                            <td>{{$row->name}}</td>
+                                            <td>{{$row->email}}</td>
+                                           <td>
+                                                @if(!empty($row->getRoleNames()))
+                                                    @foreach ($row->getRoleNames() as $role)
+                                                        <label class="badge badge-success">{{ $role }}</label>                                                
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                            
+                                            <td><a href="{{route('users.edit', $row->id)}}" class='btn btn-primary'>Edit </a></td>
+                                            <td> <form action="{{route('users.destroy', $row->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Hapus</button>
@@ -79,13 +85,6 @@
                                         </tr>
 
                                         @endforeach
-                                        
-                                        <!-- <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>$170,750</td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>

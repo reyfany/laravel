@@ -7,8 +7,21 @@
 <link rel="stylesheet" href="{{asset('public/vendors/themify-icons/css/themify-icons.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 <link rel="stylesheet" href="{{asset('public/vendors/selectFX/css/cs-skin-elastic.css')}}">
-
 <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
+
+<script>
+    $(document).ready(function(){
+        $(".mul-select").select2({
+            placeholder: "Pilih Permission .....",
+            tags: true,
+            tokenSeparators: ['/',',',';',' '],
+            width: "100%"
+        });
+      });
+</script>
 
 <div class="breadcrumbs">
     <div class="col-sm-4">
@@ -56,49 +69,24 @@
                         </div>
 
                         @endif
-                        <!-- Untuk Form menuju ke route dulu baru contller tugas store -->
-                        <form action="{{route('tugas.store')}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
-                            @csrf
-                            <!-- Untuk Form -->
-
+                        <form action="{{route('roles.store')}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
+                            @csrf                          
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_tugas" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_role" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Kategori Tugas</label></div>
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="optionid_kategori" id="select" class="form-control">
-
-                                        @foreach($data_kategori as $kategori) 
-
-                                            <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option> 
-
+                                    <select name="optionid_permission[]" id="select" class="mul-select" multiple="true">
+                                        @foreach($allPermission as $permission) 
+                                        <option value={{$permission->id}}>
+                                        {{$permission->name}}</option> 
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Keterangan Tugas</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtketerangan_tugas" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label class=" form-control-label">Status Tugas</label></div>
-                                <div class="col col-md-9">
-                                    <div class="form-check-inline form-check">
-                                        <label for="inline-radio1" class="form-check-label ">
-                                            <input type="radio" id="inline-radio1" name="radiostatus_tugas" value="0" class="form-check-input">Belum
-                                        </label>
-                                        <label for="inline-radio2" class="form-check-label ">
-                                            <input type="radio" id="inline-radio2" name="radiostatus_tugas" value="1" class="form-check-input">Selesai
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                             
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Simpan
@@ -113,7 +101,7 @@
                         </form>
                     </div>                
                 </div>
-            </div>
+             </div>
         </div>
     </div>
 </div>

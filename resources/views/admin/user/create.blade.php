@@ -12,17 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
 
-<script>
-    $(document).ready(function(){
-        $(".mul-select").select2({
-            placeholder: "Pilih Permission .....",
-            tags: true,
-            tokenSeparators: ['/',',',';',' '],
-            width: "100%"
-        });
-      });
-</script>
-
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
@@ -69,28 +58,38 @@
                         </div>
 
                         @endif
-                        <form action="{{route('roles.update',$role->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
-                            @method('PATCH')
+                        <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data" class="form-horizontal"> 
                             @csrf                          
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
-                                <div class="col-12 col-md-9"><input type="text" value="{{$role->name}}" id="text-input" name="txtnama_role" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama User</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtnama_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email User</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtemail_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Password</label></div>
+                                <div class="col-12 col-md-9"><input type="password" id="text-input" name="txtpassword_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Konfirmasi Password</label></div>
+                                <div class="col-12 col-md-9"><input type="password" id="text-input" name="txtkonfirmasipassword_user" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                            </div>
+                            
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Role</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="optionid_permission[]" id="select" class="mul-select" multiple="true">
-                                    @foreach($allPermission as $permission)
-
-                                        <option value= {{$permission->id}}
-                                            @if(in_array($permission->id,$rolePermission))
-                                                selected
-                                            @endif
-                                        >
-                                            {{$permission->name}}</option>
-
-                                        @endforeach
+                                    <select name="role_user" id="select" class="form-control">
+                                      
+                                        @foreach($allRoles as $role) 
+                                        <option value={{$role->id}}>
+                                            {{$role->name}}</option> 
+                                        @endforeach  
+                                    
                                     </select>
                                 </div>
                             </div>
@@ -113,7 +112,7 @@
     </div>
 </div>
 
-<script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('public/vendors/jquery/dist/jquery.min.js')}}"></>
 <script src="{{asset('public/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
 
 <script src="{{asset('public/vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
