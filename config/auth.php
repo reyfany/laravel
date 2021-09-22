@@ -34,18 +34,6 @@ return [
     | Supported: "session", "token"
     |
     */
-
-    // 'guards' => [
-    //     'web' => [
-    //         'driver' => 'session',
-    //         'provider' => 'users',
-    //     ],
-    //     'api' => [
-    //         'driver' => 'passport',
-    //         'provider' => 'users',
-    //         'hash' => false,
-    //     ],
-    // ],
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -55,6 +43,7 @@ return [
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
