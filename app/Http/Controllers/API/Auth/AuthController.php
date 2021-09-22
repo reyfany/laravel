@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -10,16 +11,14 @@ class AuthController extends Controller
     //
     public function register(Request $request)
     {
-        $validateData = $request->validate
-        ([
+        $validateData = $request->validate([
                 'name' => 'required|max:25',
                 'email' => 'email | required | unique:users',
                 'password' => 'required | confirmed',
         ]);
 
         // create user
-        $user = new User
-        ([
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -32,16 +31,13 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validateData = $request->validate
-        ([
+        $validateData = $request->validate([
             'email' => 'email | required | unique:users',
             'password' => 'required | confirmed',
         ]);
 
         $login_detail = request(['email','password']);
-
-        if(!Auth::attempt($login_detail))
-        {
+        if(!Auth::attempt($login_detail)){
             return response()->json([
                 'error' => 'login gagal. Cek lagi detail login'
             ], 401);
