@@ -19,9 +19,9 @@ class UserController extends Controller
      */
 
 
-    function __construct(){
-        $this -> middleware(['role:admin']);
-    }
+    // function __construct(){
+    //     $this -> middleware(['role:admin']);
+    // }
 
     // public function __construct()
     // {
