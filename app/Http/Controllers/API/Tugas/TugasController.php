@@ -11,7 +11,7 @@ class TugasController extends Controller
     public function store(Request $request){
         $validateData=$request->validate([
             'id'=>'required',
-            'nama_tugas'=>'required',
+            'nama_tugas'=>'required'
             
         ]);
     }
