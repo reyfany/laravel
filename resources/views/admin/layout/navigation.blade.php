@@ -13,14 +13,14 @@
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="{{url('/admin')}}"> <i class="menu-icon fa fa-dashboard"></i>Beranda</a>
-                        <a href="{{url('/admin/kategori')}}"> <i class="menu-icon fa fa-dashboard"></i>Kategori</a>
-                        <a href="{{url('/admin/tugas')}}"> <i class="menu-icon fa fa-dashboard"></i>Tugas</a>
-                        {{-- <a href="{{url('/admin/pelajar')}}"> <i class="menu-icon fa fa-dashboard"></i>Mahasiswa</a> --}}
-                        <a href="{{url('/admin/sekolah')}}"> <i class="menu-icon fa fa-dashboard"></i>Sekolah</a>
+                        <a href="{{url('/admin/kategori')}}"> <i class="menu-icon fa fa-briefcase"></i>Kategori</a>
+                        <a href="{{url('/admin/tugas')}}"> <i class="menu-icon fa fa-tasks"></i>Tugas</a>
+                        {{-- <a href="{{url('/admin/mahasiswa')}}"> <i class="menu-icon fa fa-dashboard"></i>Mahasiswa</a> --}}
+                        <a href="{{url('/admin/sekolah')}}"> <i class="menu-icon fa fa-certificate"></i>Sekolah</a>
                         {{-- @role('admin') --}}
                         {{-- hanya kelihatan tugas,mahasiswa,sekolah --}}
-                        <a href="{{url('/admin/roles')}}"> <i class="menu-icon fa fa-dashboard"></i>Role</a>
-                        <a href="{{url('/admin/users')}}"> <i class="menu-icon fa fa-dashboard"></i>User</a>
+                        <a href="{{url('/admin/roles')}}"> <i class="menu-icon fa fa-list"></i>Role</a>
+                        <a href="{{url('/admin/users')}}"> <i class="menu-icon fa fa-user"></i>User</a>
                         {{-- @endrole --}}
                     </li>
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
