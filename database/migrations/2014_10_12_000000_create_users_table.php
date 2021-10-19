@@ -34,3 +34,7 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
+
+
+
+// $table->string('alamat');

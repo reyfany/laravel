@@ -11,6 +11,7 @@ class TugasController extends Controller
 {
     public function getAll()
     {
+        // data mengambil dari tabel task urutan dari id
         $data =DB::table('tasks')
             ->orderBy('id','desc')
             ->get();
@@ -20,6 +21,7 @@ class TugasController extends Controller
 
     public function store(Request $request)
     {
+        // validasi dari request ada id nama id kategori tugas dan status
         $validateData=$request->validate([
             'id'=>'required',
             'nama_tugas'=>'required',

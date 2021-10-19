@@ -16,6 +16,7 @@ class AuthController extends Controller
                 'name' => 'required|max:25',
                 'email' => 'email | required | unique:users',
                 'password' => 'required | confirmed',
+                // bisa tambah data lainnya contoh 'alamat' => 'required|max:50',
         ]);
 
         // create user
@@ -23,7 +24,9 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            //bisa tambah field lainnya contoh  'alamat' => $request->alamat,
         ]);
+        // field yang harus diisi ketika register mulai dari memasukkan nama email dan password
 
         $user->save();
 
@@ -56,6 +59,7 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'name' => $user->name,
             'email' => $user->email
+            // respon setelah selesai login ada token dari laravel passport user name dan email
         ], 200);
     }
 }
