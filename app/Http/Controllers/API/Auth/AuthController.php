@@ -42,9 +42,7 @@ class AuthController extends Controller
 
         $login_detail = request(['email','password']);
         if(!Auth::attempt($login_detail)){
-            return response()->json([
-                'error' => 'login gagal. Cek lagi detail login',
-            ], 401);
+            return response()->json(['error' => 'login gagal. Cek lagi detail login',], 401);
         }
 
         $user= $request->user();

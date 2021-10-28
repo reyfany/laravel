@@ -73,6 +73,15 @@
                                     </span>
                                 @enderror
                         </div>
+                        {{-- <div class="form-group">
+                            <label>Alamat</label>
+                            <input id="alamat" type="password" class="form-control @error('alamat') is-invalid @enderror" name="alamat" required autocomplete="alamat">
+                            @error('alamat')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                </div> --}}
                         <div class="form-group">
                                     <label>Konfirmasi Password</label>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
